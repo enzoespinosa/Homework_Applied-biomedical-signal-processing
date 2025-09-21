@@ -35,8 +35,9 @@ t = np.arange(len(x))/fs
     phase of a narrow band signal. 
 
     Q: Comment the figures.
+    On the plots, we see the original breathing signal with all its oscillations, and on top of it the Hilbert envelope. While the raw signal goes up and down at each inhale and exhale, the envelope draws a smoother curve that follows the global amplitude variations over time. This representation makes the breathing dynamics clearer, as the envelope highlights the modulation of the signal rather than each individual oscillation.
     Q: Why the envelope does no follow the maxima of the signal
-
+    The envelope represents the instantaneous amplitude derived from the analytic signal using the Hilbert transform. This analytic signal is complex: its real part corresponds to the original signal x(t), while its imaginary part is the quadrature component. Therefore, it is normal that the envelope is not strictly identical to the raw signal. Unlike simple maxima and minima, which are sensitive to noise and waveform asymmetry, the envelope offers a smoother and more robust measure of amplitude. For this reason, it does not perfectly align with every peak of the signal, but instead provides a clearer and more reliable view of how the amplitude evolves over time.
 """
 
 # compute the analytical signal of x (Hilbert transform)
@@ -58,7 +59,9 @@ py.title('Breathing signal')
     The signal is first filtered for this interval.
 
     Q: Comment the figures
+    After applying a band-pass filter to the signal, it fulfills the narrowband requirement and thus allows the estimation of the instantaneous amplitude. In the plot, we observe the raw breathing signal $x(t)$ together with its envelope $|hilbert(x)|$. As mentioned earlier, it is expected that the envelope does not perfectly follow every maximum; instead, it provides a smoother and less noisy representation of the amplitude. In the raw signal, we can clearly distinguish narrowband oscillations corresponding to each inspiration–expiration cycle, with a frequency of about 0.17 Hz, which falls within the normal respiratory range.
     Q: How is the estimation of the amplitude envelope.
+    Because the signal was band-pass filtered in the range of 0.1–0.25 Hz, it satisfies the narrowband condition required for the Hilbert method to produce reliable results. With this preprocessing, the envelope, obtained as the modulus of the analytic signal, provides a smooth and robust estimate of how the breathing amplitude evolves over time. As we can see in the plot, this approach works well.
 
 """
 
